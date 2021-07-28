@@ -8,7 +8,23 @@ const CREDENTIAL_DEFINITION_PATH = {
   GETS: 'created',
 };
 
+const ISSUE_CREDENTIAL_PATH = {
+  ROOT: '/issue-credential',
+  CREATE: 'create',
+  SEND_OFFER: 'send-offer',
+};
+
+const CONNECTION_PATH = {
+  ROOT: '/connections',
+  CREATE: 'create-invitation',
+  RECEIVE: `receive-invitation`,
+  ENDPOINTS: `endpoints`,
+  METADATA: `metadata`,
+};
+
 module.exports = {
   SCHEMA_PATH,
   CREDENTIAL_DEFINITION_PATH,
+  ISSUE_CREDENTIAL_PATH,
+  CONNECTION_PATH,
 };
