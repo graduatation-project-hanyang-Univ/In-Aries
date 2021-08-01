@@ -1,6 +1,7 @@
 const { createSchema, getSchema, getSchemas } = require('./schema');
 const { createCredentialDefinition, getCredentialDefinitions, getCredentialDefinition } = require('./credential-definition');
 const { createInvitation, getConnection, getConnections, receiveInvitation } = require('./connection');
+const { sendOffer } = require('./issue-credential-1.0');
 
 describe('테스트', () => {
   let schemaId;
@@ -70,6 +71,17 @@ describe('테스트', () => {
 
     test('getConnection', async () => {
       const res = await getConnection(invitationObj.connection_id);
+      console.log(res);
+    });
+  });
+
+  describe('Issue Credential 1.0 테스트', () => {
+    test('sendOffer', async () => {
+      const res = await sendOffer({
+        connectionId: '',
+        credDefId: '',
+        credentialPreview: '',
+      });
       console.log(res);
     });
   });
