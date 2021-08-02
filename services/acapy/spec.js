@@ -1,6 +1,14 @@
 const { createSchema, getSchema, getSchemas } = require('./schema');
 const { createCredentialDefinition, getCredentialDefinitions, getCredentialDefinition } = require('./credential-definition');
-const { createInvitation, getConnection, getConnections, receiveInvitation } = require('./connection');
+const {
+  createInvitation,
+  getConnection,
+  getConnections,
+  receiveInvitation,
+  deleteConnection,
+  acceptInvitation,
+  getConnectionEndpoints,
+} = require('./connection');
 const { sendOffer } = require('./issue-credential-1.0');
 
 describe('테스트', () => {
@@ -64,13 +72,30 @@ describe('테스트', () => {
       console.log(res);
     });
 
+    test('accept invitation', async () => {
+      const res = await acceptInvitation('7ae68d1b-68be-45ef-968a-7bd2d979c3c5');
+      console.log(res);
+    });
+
     test('getConnections', async () => {
       const res = await getConnections();
       console.log(res);
     });
 
+    test('get connection endpoints', async () => {
+      const res = await getConnectionEndpoints('7ae68d1b-68be-45ef-968a-7bd2d979c3c5');
+      console.log(res);
+    });
+
     test('getConnection', async () => {
-      const res = await getConnection(invitationObj.connection_id);
+      // const res = await getConnection(invitationObj.connection_id);
+      const res = await getConnection('7ae68d1b-68be-45ef-968a-7bd2d979c3c5');
+      console.log(res);
+    });
+
+    test('delete connection', async () => {
+      // const res = await deleteConnection(invitationObj.connection_id);
+      const res = await deleteConnection('ad0013d6-2ffb-4f87-86fd-64a3476bdaf3');
       console.log(res);
     });
   });

@@ -41,6 +41,18 @@ async function getConnection(connId) {
   return extractDataFromAxiosRes(res);
 }
 
+async function deleteConnection(connId) {
+  const res = await axiosWithAcapy.delete(`${CONNECTION_PATH.ROOT}/${connId}`);
+
+  return extractDataFromAxiosRes(res);
+}
+
+async function acceptInvitation(connId) {
+  const res = await axiosWithAcapy.post(`${CONNECTION_PATH.ROOT}/${connId}/${CONNECTION_PATH.ACCEPT}`);
+
+  return extractDataFromAxiosRes(res);
+}
+
 // 연결이 돼야 실행되는듯?
 async function getConnectionEndpoints(connId) {
   const res = await axiosWithAcapy.get(`${CONNECTION_PATH.ROOT}/${connId}/${CONNECTION_PATH.ENDPOINTS}`);
@@ -53,5 +65,7 @@ module.exports = {
   receiveInvitation,
   getConnections,
   getConnection,
+  deleteConnection,
+  acceptInvitation,
   getConnectionEndpoints,
 };

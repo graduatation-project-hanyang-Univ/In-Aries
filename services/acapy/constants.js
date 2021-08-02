@@ -17,9 +17,10 @@ const ISSUE_CREDENTIAL_PATH = {
 const CONNECTION_PATH = {
   ROOT: '/connections',
   CREATE: 'create-invitation',
-  RECEIVE: `receive-invitation`,
-  ENDPOINTS: `endpoints`,
-  METADATA: `metadata`,
+  RECEIVE: 'receive-invitation',
+  ACCEPT: 'accept-invitation',
+  ENDPOINTS: 'endpoints',
+  METADATA: 'metadata',
 };
 
 module.exports = {
