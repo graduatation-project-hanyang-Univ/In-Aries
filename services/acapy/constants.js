@@ -19,7 +19,8 @@ const CONNECTION_PATH = {
   ROOT: '/connections',
   CREATE: 'create-invitation',
   RECEIVE: 'receive-invitation',
-  ACCEPT: 'accept-invitation',
+  ACCEPT_INVITATION: 'accept-invitation',
+  ACCEPT_REQUEST: 'accept-request',
   ENDPOINTS: 'endpoints',
   METADATA: 'metadata',
 };

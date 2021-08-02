@@ -9,6 +9,7 @@ const {
   receiveInvitation,
   deleteConnection,
   acceptInvitation,
+  acceptRequest,
   getConnectionEndpoints,
 } = require('./connection');
 const { sendOffer, createOffer } = require('./issue-credential-1.0');
@@ -20,7 +21,7 @@ describe('테스트', () => {
     test('Schema  생성 테스트', async () => {
       const res = await createSchema({
         schemaName: 'schema_tests',
-        schemaVersion: '1.3',
+        schemaVersion: '2.0',
         attributes: ['age', 'sex', 'height', 'name'],
       });
 
@@ -65,17 +66,22 @@ describe('테스트', () => {
   describe('Connection 테스트', () => {
     let invitationObj;
     test('create invitation', async () => {
-      invitationObj = await createInvitation();
+      invitationObj = await createInvitation('Issuer test');
       console.log(invitationObj);
     });
 
     test('receive invitation', async () => {
-      const res = await receiveInvitation(invitationObj.invitation);
+      const res = await receiveInvitation(invitationObj.invitation, 'Holder test');
       console.log(res);
     });
 
     test('accept invitation', async () => {
-      const res = await acceptInvitation('360cdc3f-7e63-44d7-a78f-088f3e5ab197');
+      const res = await acceptInvitation('0fa55de9-5142-4680-ab74-e5af71891e6f');
+      console.log(res);
+    });
+
+    test('accept request', async () => {
+      const res = await acceptRequest('6505c038-0810-4693-bf20-4be1ff34dee4');
       console.log(res);
     });
 
@@ -91,20 +97,20 @@ describe('테스트', () => {
 
     test('getConnection', async () => {
       // const res = await getConnection(invitationObj.connection_id);
-      const res = await getConnection('7ae68d1b-68be-45ef-968a-7bd2d979c3c5');
+      const res = await getConnection('0fa55de9-5142-4680-ab74-e5af71891e6f');
       console.log(res);
     });
 
     test('delete connection', async () => {
       // const res = await deleteConnection(invitationObj.connection_id);
-      const res = await deleteConnection('ad0013d6-2ffb-4f87-86fd-64a3476bdaf3');
+      const res = await deleteConnection('dbfbd060-2396-46d6-95da-3d8fb85bec8a');
       console.log(res);
     });
   });
 
   describe('Basic Message 테스트', () => {
     test('send message', async () => {
-      const res = await sendMessage('7ae68d1b-68be-45ef-968a-7bd2d979c3c5', 'Hi');
+      const res = await sendMessage('6505c038-0810-4693-bf20-4be1ff34dee4', 'Hi');
 
       console.log(res);
     });
@@ -113,7 +119,7 @@ describe('테스트', () => {
   describe('Issue Credential 1.0 테스트', () => {
     test('create offer', async () => {
       const res = await createOffer({
-        credDefId: 'BnTQb7U3UEr357nE6bzWHu:3:CL:87156:test_tag_support_revocation',
+        credDefId: 'BnTQb7U3UEr357nE6bzWHu:3:CL:87222:test_tag_support_revocation',
         credentialPreview: {
           '@type': 'issue-credential/1.0/credential-preview',
           attributes: PREVIEW_ATTRIBUTES,
@@ -124,8 +130,8 @@ describe('테스트', () => {
 
     test('sendOffer', async () => {
       const res = await sendOffer({
-        connectionId: '360cdc3f-7e63-44d7-a78f-088f3e5ab197',
-        credDefId: 'BnTQb7U3UEr357nE6bzWHu:3:CL:87156:test_tag_support_revocation',
+        connectionId: '6505c038-0810-4693-bf20-4be1ff34dee4',
+        credDefId: 'BnTQb7U3UEr357nE6bzWHu:3:CL:87222:test_tag_support_revocation',
         credentialPreview: {
           '@type': 'issue-credential/1.0/credential-preview',
           attributes: PREVIEW_ATTRIBUTES,

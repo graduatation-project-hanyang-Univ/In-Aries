@@ -1,30 +1,26 @@
 const { axiosWithAcapy, extractDataFromAxiosRes } = require('../../uilts/axios_utils');
 const { CONNECTION_PATH } = require('./constants');
 
-/*
-{
-    body: {
-      mediation_id: '',
-      metadata: {},
-      my_label: 'test_my_label',
-      recipient_keys: [''],
-      routing_keys: [''],
-      service_endpoint: '',
+async function createInvitation(alias) {
+  const res = await axiosWithAcapy.post(
+    `${CONNECTION_PATH.ROOT}/${CONNECTION_PATH.CREATE}`,
+    {},
+    {
+      params: {
+        alias,
+      },
     },
-    alias: '',
-    auto_accept: false,
-    multi_use: true,
-    public: false,
-  }
- */
-async function createInvitation() {
-  const res = await axiosWithAcapy.post(`${CONNECTION_PATH.ROOT}/${CONNECTION_PATH.CREATE}`);
+  );
 
   return extractDataFromAxiosRes(res);
 }
 
-async function receiveInvitation(invitation) {
-  const res = await axiosWithAcapy.post(`${CONNECTION_PATH.ROOT}/${CONNECTION_PATH.RECEIVE}`, invitation);
+async function receiveInvitation(invitation, alias) {
+  const res = await axiosWithAcapy.post(`${CONNECTION_PATH.ROOT}/${CONNECTION_PATH.RECEIVE}`, invitation, {
+    params: {
+      alias,
+    },
+  });
 
   return extractDataFromAxiosRes(res);
 }
@@ -48,7 +44,13 @@ async function deleteConnection(connId) {
 }
 
 async function acceptInvitation(connId) {
-  const res = await axiosWithAcapy.post(`${CONNECTION_PATH.ROOT}/${connId}/${CONNECTION_PATH.ACCEPT}`);
+  const res = await axiosWithAcapy.post(`${CONNECTION_PATH.ROOT}/${connId}/${CONNECTION_PATH.ACCEPT_INVITATION}`);
+
+  return extractDataFromAxiosRes(res);
+}
+
+async function acceptRequest(connId) {
+  const res = await axiosWithAcapy.post(`${CONNECTION_PATH.ROOT}/${connId}/${CONNECTION_PATH.ACCEPT_REQUEST}`);
 
   return extractDataFromAxiosRes(res);
 }
@@ -67,5 +69,6 @@ module.exports = {
   getConnection,
   deleteConnection,
   acceptInvitation,
+  acceptRequest,
   getConnectionEndpoints,
 };
