@@ -23,9 +23,15 @@ const CONNECTION_PATH = {
   METADATA: 'metadata',
 };
 
+const BASIC_MESSAGE = {
+  ROOT: '/connections',
+  SEND: 'send-message',
+};
+
 module.exports = {
   SCHEMA_PATH,
   CREDENTIAL_DEFINITION_PATH,
   ISSUE_CREDENTIAL_PATH,
   CONNECTION_PATH,
+  BASIC_MESSAGE,
 };

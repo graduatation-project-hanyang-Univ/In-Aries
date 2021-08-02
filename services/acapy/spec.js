@@ -1,3 +1,4 @@
+const { sendMessage } = require('./basic-message');
 const { createSchema, getSchema, getSchemas } = require('./schema');
 const { createCredentialDefinition, getCredentialDefinitions, getCredentialDefinition } = require('./credential-definition');
 const {
@@ -96,6 +97,14 @@ describe('테스트', () => {
     test('delete connection', async () => {
       // const res = await deleteConnection(invitationObj.connection_id);
       const res = await deleteConnection('ad0013d6-2ffb-4f87-86fd-64a3476bdaf3');
+      console.log(res);
+    });
+  });
+
+  describe('Basic Message 테스트', () => {
+    test('send message', async () => {
+      const res = await sendMessage('7ae68d1b-68be-45ef-968a-7bd2d979c3c5', 'Hi');
+
       console.log(res);
     });
   });
