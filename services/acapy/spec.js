@@ -1,3 +1,4 @@
+const { PREVIEW_ATTRIBUTES } = require('./constants');
 const { sendMessage } = require('./basic-message');
 const { createSchema, getSchema, getSchemas } = require('./schema');
 const { createCredentialDefinition, getCredentialDefinitions, getCredentialDefinition } = require('./credential-definition');
@@ -10,7 +11,7 @@ const {
   acceptInvitation,
   getConnectionEndpoints,
 } = require('./connection');
-const { sendOffer } = require('./issue-credential-1.0');
+const { sendOffer, createOffer } = require('./issue-credential-1.0');
 
 describe('테스트', () => {
   let schemaId;
@@ -74,7 +75,7 @@ describe('테스트', () => {
     });
 
     test('accept invitation', async () => {
-      const res = await acceptInvitation('7ae68d1b-68be-45ef-968a-7bd2d979c3c5');
+      const res = await acceptInvitation('360cdc3f-7e63-44d7-a78f-088f3e5ab197');
       console.log(res);
     });
 
@@ -110,11 +111,25 @@ describe('테스트', () => {
   });
 
   describe('Issue Credential 1.0 테스트', () => {
+    test('create offer', async () => {
+      const res = await createOffer({
+        credDefId: 'BnTQb7U3UEr357nE6bzWHu:3:CL:87156:test_tag_support_revocation',
+        credentialPreview: {
+          '@type': 'issue-credential/1.0/credential-preview',
+          attributes: PREVIEW_ATTRIBUTES,
+        },
+      });
+      console.log(res);
+    });
+
     test('sendOffer', async () => {
       const res = await sendOffer({
-        connectionId: '',
-        credDefId: '',
-        credentialPreview: '',
+        connectionId: '360cdc3f-7e63-44d7-a78f-088f3e5ab197',
+        credDefId: 'BnTQb7U3UEr357nE6bzWHu:3:CL:87156:test_tag_support_revocation',
+        credentialPreview: {
+          '@type': 'issue-credential/1.0/credential-preview',
+          attributes: PREVIEW_ATTRIBUTES,
+        },
       });
       console.log(res);
     });

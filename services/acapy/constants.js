@@ -12,6 +12,7 @@ const ISSUE_CREDENTIAL_PATH = {
   ROOT: '/issue-credential',
   CREATE: 'create',
   SEND_OFFER: 'send-offer',
+  CREATE_OFFER: 'create-offer',
 };
 
 const CONNECTION_PATH = {
@@ -23,15 +24,35 @@ const CONNECTION_PATH = {
   METADATA: 'metadata',
 };
 
-const BASIC_MESSAGE = {
+const BASIC_MESSAGE_PATH = {
   ROOT: '/connections',
   SEND: 'send-message',
 };
+
+const PREVIEW_ATTRIBUTES = [
+  {
+    name: 'age',
+    value: '25',
+  },
+  {
+    name: 'sex',
+    value: 'male',
+  },
+  {
+    name: 'height',
+    value: '180',
+  },
+  {
+    name: 'name',
+    value: 'taeyong',
+  },
+];
 
 module.exports = {
   SCHEMA_PATH,
   CREDENTIAL_DEFINITION_PATH,
   ISSUE_CREDENTIAL_PATH,
   CONNECTION_PATH,
-  BASIC_MESSAGE,
+  BASIC_MESSAGE_PATH,
+  PREVIEW_ATTRIBUTES,
 };
