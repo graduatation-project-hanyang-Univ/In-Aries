@@ -2,35 +2,43 @@ const { extractDataFromAxiosRes } = require('../../uilts/axios_utils');
 const { ISSUE_CREDENTIAL_PATH } = require('./constants');
 const { axiosWithAcapy } = require('../../uilts/axios_utils');
 
-async function createOffer(options) {
-  const { credDefId, credentialPreview } = options;
+async function sendProposal(options) {
+  const { connId, credentialProposal } = options;
 
-  const res = await axiosWithAcapy.post(`${ISSUE_CREDENTIAL_PATH.ROOT}/${ISSUE_CREDENTIAL_PATH.CREATE_OFFER}`, {
-    cred_def_id: credDefId,
-    credential_preview: credentialPreview,
+  const res = await axiosWithAcapy.post(`${ISSUE_CREDENTIAL_PATH.ROOT}/${ISSUE_CREDENTIAL_PATH.SEND_PROPOSAL}`, {
+    connection_id: connId,
+    credential_proposal: credentialProposal,
   });
 
   return extractDataFromAxiosRes(res);
 }
 
-async function sendOffer(options) {
-  const { connectionId, credDefId, credentialPreview } = options;
+async function sendCredential(options) {
+  const { connId, credentialProposal } = options;
 
-  const res = await axiosWithAcapy.post(`${ISSUE_CREDENTIAL_PATH.ROOT}/${ISSUE_CREDENTIAL_PATH.SEND_OFFER}`, {
-    connection_id: connectionId,
-    cred_def_id: credDefId,
-    credential_preview: credentialPreview,
+  const res = await axiosWithAcapy.post(`${ISSUE_CREDENTIAL_PATH.ROOT}/${ISSUE_CREDENTIAL_PATH.SEND}`, {
+    connection_id: connId,
+    credential_proposal: credentialProposal,
   });
-  console.log(res);
 
   return extractDataFromAxiosRes(res);
 }
 
-async function createVC() {
-  const res = axiosWithAcapy.post(`${ISSUE_CREDENTIAL_PATH.ROOT}/${ISSUE_CREDENTIAL_PATH.CREATE}`, {});
+async function getCredentialRecords() {
+  const res = await axiosWithAcapy.get(`${ISSUE_CREDENTIAL_PATH.ROOT}/${ISSUE_CREDENTIAL_PATH.RECORDS}`);
+
+  return extractDataFromAxiosRes(res);
+}
+
+async function storeCredential(credExId) {
+  const res = await axiosWithAcapy.post(`${ISSUE_CREDENTIAL_PATH.ROOT}/${ISSUE_CREDENTIAL_PATH.RECORDS}/${credExId}/${ISSUE_CREDENTIAL_PATH.STORE}`);
+
+  return extractDataFromAxiosRes(res);
 }
 
 module.exports = {
-  sendOffer,
-  createOffer,
+  sendProposal,
+  sendCredential,
+  storeCredential,
+  getCredentialRecords,
 };

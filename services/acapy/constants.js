@@ -10,9 +10,10 @@ const CREDENTIAL_DEFINITION_PATH = {
 
 const ISSUE_CREDENTIAL_PATH = {
   ROOT: '/issue-credential',
-  CREATE: 'create',
-  SEND_OFFER: 'send-offer',
-  CREATE_OFFER: 'create-offer',
+  SEND: 'send',
+  RECORDS: 'records',
+  STORE: 'store',
+  SEND_PROPOSAL: 'send-proposal',
 };
 
 const CONNECTION_PATH = {
@@ -28,6 +29,10 @@ const CONNECTION_PATH = {
 const BASIC_MESSAGE_PATH = {
   ROOT: '/connections',
   SEND: 'send-message',
+};
+
+const CREDENTIALS_PATH = {
+  ROOT: '/credentials',
 };
 
 const PREVIEW_ATTRIBUTES = [
@@ -56,4 +61,5 @@ module.exports = {
   CONNECTION_PATH,
   BASIC_MESSAGE_PATH,
   PREVIEW_ATTRIBUTES,
+  CREDENTIALS_PATH,
 };
