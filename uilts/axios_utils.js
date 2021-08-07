@@ -1,7 +1,8 @@
 const Axios = require('axios');
+require('dotenv').config();
 
 const axiosWithAcapy = Axios.create({
-  baseURL: 'http://localhost:8001',
+  baseURL: process.env.ACAPY_ADMIN_ENDPOINT,
 });
 
 function extractDataFromAxiosRes(res) {
