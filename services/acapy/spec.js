@@ -1,5 +1,5 @@
 const { getCredentials } = require('./credentials');
-const { PREVIEW_ATTRIBUTES } = require('./constants');
+const { PREVIEW_ATTRIBUTES, PROOF_REQUEST } = require('./constants');
 const { sendMessage } = require('./basic-message');
 const { createSchema, getSchema, getSchemas } = require('./schema');
 const { createCredentialDefinition, getCredentialDefinitions, getCredentialDefinition } = require('./credential-definition');
@@ -14,6 +14,7 @@ const {
   getConnectionEndpoints,
 } = require('./connection');
 const { sendProposal, sendCredential, getCredentialRecords, storeCredential } = require('./issue-credential-1.0');
+const presentProof = require('./present-proof-1.0');
 
 describe('테스트', () => {
   let schemaId;
@@ -21,7 +22,7 @@ describe('테스트', () => {
   describe('Schema 테스트', () => {
     test('Schema  생성 테스트', async () => {
       const res = await createSchema({
-        schemaName: 'schema_tests',
+        schemaName: 'schema_tests3',
         schemaVersion: '5.0',
         attributes: ['age', 'sex', 'height', 'name'],
       });
@@ -120,7 +121,7 @@ describe('테스트', () => {
   describe('Issue Credential 1.0 테스트', () => {
     test('send proposal', async () => {
       const res = await sendProposal({
-        connId: '8ca20208-83a7-4fb7-adc3-c7960761067c',
+        connId: 'e62a4e3c-d7e2-4e2d-a422-ae23faf0bbfb',
         credentialProposal: {
           '@type': 'issue-credential/1.0/credential-preview',
           attributes: PREVIEW_ATTRIBUTES,
@@ -161,6 +162,20 @@ describe('테스트', () => {
     test('get credentials', async () => {
       const res = await getCredentials();
       console.log(res);
+      console.log(res.results[0]);
+    });
+  });
+
+  describe('Present Proof 1.0 테스트', () => {
+    test('send request', async () => {
+      const res = await presentProof.sendRequest({
+        connId: '2d633a59-205e-4a27-a460-2b7fe0c61849',
+        proofRequest: PROOF_REQUEST,
+      });
+      console.log(res);
+    });
+    test('verify presentation', async () => {
+      await presentProof.verifyPresentation('ab7ac84e-38c3-486d-b667-ecbd333cdd6c');
     });
   });
 });

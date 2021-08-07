@@ -16,6 +16,13 @@ const ISSUE_CREDENTIAL_PATH = {
   SEND_PROPOSAL: 'send-proposal',
 };
 
+const PRESENT_PROOF_PATH = {
+  ROOT: '/present-proof',
+  RECORDS: 'records',
+  SEND_REQUEST: 'send-request',
+  VERIFY: 'verify-presentation',
+};
+
 const CONNECTION_PATH = {
   ROOT: '/connections',
   CREATE: 'create-invitation',
@@ -54,6 +61,35 @@ const PREVIEW_ATTRIBUTES = [
   },
 ];
 
+const PROOF_REQUEST = {
+  name: 'test-proof-req',
+  version: '1.0',
+  requested_attributes: {
+    attr1_referent: {
+      name: 'name',
+      non_revoked: {
+        from: 0,
+        to: 9999999999999,
+      },
+    },
+  },
+  requested_predicates: {
+    predicate1_referent: {
+      name: 'age',
+      p_type: '>=',
+      p_value: 18,
+      non_revoked: {
+        from: 0,
+        to: 9999999999999,
+      },
+    },
+  },
+  non_revoked: {
+    from: 0,
+    to: 9999999999999,
+  },
+};
+
 module.exports = {
   SCHEMA_PATH,
   CREDENTIAL_DEFINITION_PATH,
@@ -62,4 +98,6 @@ module.exports = {
   BASIC_MESSAGE_PATH,
   PREVIEW_ATTRIBUTES,
   CREDENTIALS_PATH,
+  PRESENT_PROOF_PATH,
+  PROOF_REQUEST,
 };
