@@ -17,6 +17,7 @@ async function sendCredential(options) {
   const { connId, credentialProposal } = options;
 
   const res = await axiosWithAcapy.post(`${ISSUE_CREDENTIAL_PATH.ROOT}/${ISSUE_CREDENTIAL_PATH.SEND}`, {
+    auto_remove: false,
     connection_id: connId,
     credential_proposal: credentialProposal,
   });
