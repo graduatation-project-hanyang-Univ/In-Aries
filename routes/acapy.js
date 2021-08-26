@@ -10,6 +10,16 @@ const PATH = {
   PRESENT_PROOF: '/topic/present_proof/',
 };
 
+router.post(`${PATH.CONNECTIONS}`, async (req, res) => {
+  const { connection_id: connId, state, rfc23_state: rfc23State } = req.body;
+
+  if (rfc23State === 'response-sent' && state === 'response') {
+    console.log(`connected, connection id : ${connId}`);
+  }
+
+  res.status(200).end();
+});
+
 router.post(`${PATH.ISSUE_CREDENTIAL}`, async (req, res) => {
   const {
     role,
