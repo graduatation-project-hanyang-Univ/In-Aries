@@ -8,7 +8,7 @@ const cors = require('cors');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const acapyWebHookRouter = require('./routes/acapy');
-const uportWebHookRouter = require('./routes/uport');
+const veramoRouter = require('./routes/veramo');
 
 const app = express();
 
@@ -26,7 +26,7 @@ app.use(cors());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/webhooks', acapyWebHookRouter);
-app.use('/uports', uportWebHookRouter);
+app.use('/veramo', veramoRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
