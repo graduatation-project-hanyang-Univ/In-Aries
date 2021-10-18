@@ -18,6 +18,11 @@ async function makeVeramoVPRequestJWT() {
           claimType: 'seat',
           essential: true,
         },
+        {
+          reason: 'We need it',
+          claimType: 'name',
+          essential: true,
+        },
       ],
     },
   });

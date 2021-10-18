@@ -31,7 +31,10 @@ async function makeVeramoVCJWT() {
       type: ['VerifiableCredential'],
       issuanceDate: new Date().toISOString(),
       credentialSubject: {
-        seat: 'r7', // TODO 일단 하드코딩, 추후 변경 검토
+        name: 'concert name',
+        company: ' company name',
+        seat: 'seat info', // TODO 일단 하드코딩, 추후 변경 검토
+        date: '1634520415',
       },
     },
     proofFormat: 'jwt',
