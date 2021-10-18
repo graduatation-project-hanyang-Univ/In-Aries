@@ -31,9 +31,9 @@ function makeTestProofRequest(schemaId) {
     },
     requested_predicates: {
       predicate1_referent: {
-        name: 'age',
+        name: 'date',
         p_type: '>=',
-        p_value: 18,
+        p_value: 0,
         restrictions: [
           {
             schema_id: schemaId,
@@ -65,7 +65,7 @@ describe('Happy Path 테스트', () => {
     const res = await createSchema({
       schemaName: `schema_tests_${randomNum}`,
       schemaVersion: '1.0',
-      attributes: ['age', 'sex', 'height', 'name'],
+      attributes: ['name', 'company', 'seat', 'date'],
     });
     schemaId = res.schema_id;
 

@@ -44,51 +44,22 @@ const CREDENTIALS_PATH = {
 
 const PREVIEW_ATTRIBUTES = [
   {
-    name: 'age',
-    value: '25',
-  },
-  {
-    name: 'sex',
-    value: 'male',
-  },
-  {
-    name: 'height',
-    value: '180',
-  },
-  {
     name: 'name',
-    value: 'taeyong',
+    value: 'concert name',
+  },
+  {
+    name: 'company',
+    value: 'company name',
+  },
+  {
+    name: 'seat',
+    value: 'seat info',
+  },
+  {
+    name: 'date',
+    value: '1634520415',
   },
 ];
-
-const PROOF_REQUEST = {
-  name: 'test-proof-req',
-  version: '1.0',
-  requested_attributes: {
-    attr1_referent: {
-      name: 'name',
-      non_revoked: {
-        from: 0,
-        to: 9999999999999,
-      },
-    },
-  },
-  requested_predicates: {
-    predicate1_referent: {
-      name: 'age',
-      p_type: '>=',
-      p_value: 18,
-      non_revoked: {
-        from: 0,
-        to: 9999999999999,
-      },
-    },
-  },
-  non_revoked: {
-    from: 0,
-    to: 9999999999999,
-  },
-};
 
 module.exports = {
   SCHEMA_PATH,
@@ -99,5 +70,4 @@ module.exports = {
   PREVIEW_ATTRIBUTES,
   CREDENTIALS_PATH,
   PRESENT_PROOF_PATH,
-  PROOF_REQUEST,
 };
