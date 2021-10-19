@@ -6,7 +6,8 @@ const { makeVeramoVCJWT } = require('../services/veramo/vc');
 const { makeVeramoVPRequestJWT } = require('../services/veramo/vp-request');
 
 router.post('/qr-code/issuance', async function (req, res, next) {
-  const jwt = await makeVeramoVCJWT();
+  console.log('veramo qr code issuance body', req.body);
+  const jwt = await makeVeramoVCJWT(req.body);
   res.send(jwt);
 });
 

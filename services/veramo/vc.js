@@ -21,7 +21,9 @@ MyOTYxNTYwLCJpc3MiOiJkaWQ6ZXRocjpyaW5rZWJ5OjB4MDM2MTcxYTU0Y2Y5ZDA1MzcxN2E5MmUzND
 }
 */
 
-async function makeVeramoVCJWT() {
+async function makeVeramoVCJWT(body) {
+  const { name, company, seat, date } = body;
+
   const id = await getOrCreateVeramoDid();
 
   const vc = await agent.createVerifiableCredential({
@@ -31,10 +33,10 @@ async function makeVeramoVCJWT() {
       type: ['VerifiableCredential'],
       issuanceDate: new Date().toISOString(),
       credentialSubject: {
-        name: 'concert name',
-        company: ' company name',
-        seat: 'seat info', // TODO 일단 하드코딩, 추후 변경 검토
-        date: '1634520415',
+        name,
+        company,
+        seat,
+        date,
       },
     },
     proofFormat: 'jwt',
