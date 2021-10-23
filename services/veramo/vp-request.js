@@ -15,7 +15,7 @@ async function makeVeramoVPRequestJWT() {
       claims: [
         {
           reason: 'We need it',
-          claimType: 'seat',
+          claimType: 'date',
           essential: true,
         },
         {
@@ -31,6 +31,34 @@ async function makeVeramoVPRequestJWT() {
   return jwt;
 }
 
+
+async function makeVeramoFailVPRequestJWT() {
+  const id = await getOrCreateVeramoDid();
+
+  const jwt = await agent.createSelectiveDisclosureRequest({
+    data: {
+      issuer: id.did,
+      claims: [
+        {
+          reason: 'We need it',
+          claimType: 'date',
+          essential: true,
+        },
+        {
+          reason: 'We need it',
+          claimType: 'organization',
+          essential: true,
+        },
+      ],
+    },
+  });
+  console.log('생성된 VP Request JWT', jwt);
+
+  return jwt;
+}
+
+
 module.exports = {
   makeVeramoVPRequestJWT,
+  makeVeramoFailVPRequestJWT,
 };
